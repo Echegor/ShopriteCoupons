@@ -1,42 +1,41 @@
 package com.archelo.coupons;
 
-import com.sun.xml.internal.ws.policy.privateutil.PolicyUtils;
-import org.apache.http.HttpEntity;
-import org.apache.http.HttpResponse;
-import org.apache.http.NameValuePair;
+import org.apache.http.*;
+import org.apache.http.client.CookieStore;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.entity.UrlEncodedFormEntity;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpPost;
+import org.apache.http.client.protocol.HttpClientContext;
+import org.apache.http.cookie.Cookie;
+import org.apache.http.impl.client.BasicCookieStore;
 import org.apache.http.impl.client.HttpClients;
-import org.apache.http.message.BasicNameValuePair;
 import org.apache.http.util.EntityUtils;
+import org.jsoup.Jsoup;
+import org.jsoup.nodes.Document;
 
 import java.io.*;
-import java.net.URI;
-import java.net.URISyntaxException;
-import java.net.URLEncoder;
-import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
-import java.util.HashMap;
+import java.util.Arrays;
 import java.util.List;
-import java.util.Map;
 
+/*Preserves session across post and get request*/
 public class HTTPPoster {
-    private static HTTPPoster ourInstance = new HTTPPoster();
+    HttpClientContext context;
+    CookieStore cookieStore;
 
-    public static HTTPPoster getInstance() {
-        return ourInstance;
+    public HTTPPoster() {
+        //RequestConfig globalConfig = RequestConfig.custom().setCookieSpec(CookieSpecs.DEFAULT).build();
+        cookieStore = new BasicCookieStore();
+        context = HttpClientContext.create();
+        context.setCookieStore(cookieStore);
     }
 
-    private HTTPPoster() {
-    }
-
-    public HttpResponse doGet(String url){
+    public HttpResponse doGet(String url) {
         try {
             HttpClient httpclient = HttpClients.createDefault();
             HttpGet httpGet = new HttpGet(url);
-            return  httpclient.execute(httpGet);
+            return httpclient.execute(httpGet, context);
 
         } catch (IOException e) {
             e.printStackTrace();
@@ -45,13 +44,13 @@ public class HTTPPoster {
         return null;
     }
 
-    public HttpResponse doPost(String url, ArrayList<NameValuePair> params){
+    public HttpResponse doPost(String url, ArrayList<NameValuePair> params) {
 
         try {
             HttpClient httpclient = HttpClients.createDefault();
             HttpPost httppost = new HttpPost(url);
             httppost.setEntity(new UrlEncodedFormEntity(params, "UTF-8"));
-            return httpclient.execute(httppost);
+            return httpclient.execute(httppost, context);
 
         } catch (IOException e) {
             e.printStackTrace();
@@ -60,17 +59,17 @@ public class HTTPPoster {
         return null;
     }
 
-    public static String convertToString(HttpEntity entity) throws IOException {
-        if(entity == null){
+    public static String convertEntityToString(HttpEntity entity) throws IOException {
+        if (entity == null) {
             throw new IOException("null entity");
         }
 
-        try (InputStream inputStream = entity.getContent()){
+        try (InputStream inputStream = entity.getContent()) {
             long len = entity.getContentLength();
             if (len != -1 && len < Integer.MAX_VALUE) {
                 return EntityUtils.toString(entity);
             } else {
-                convertInputStreamToString(inputStream);
+                return convertInputStreamToString(inputStream);
             }
         }
 
@@ -80,32 +79,50 @@ public class HTTPPoster {
         BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream));
         StringBuilder builder = new StringBuilder();
         String line;
-        while((line = bufferedReader.readLine()) != null){
+        while ((line = bufferedReader.readLine()) != null) {
             builder.append(line);
         }
-        return  builder.toString();
+        return builder.toString();
     }
 
-/*    private String toURLEncodedString(HashMap<String,String> map) {
-        if (map.isEmpty())
-            return "";
-
+    public String printResponse(HttpResponse response, OutputStream outputStream) {
         StringBuilder builder = new StringBuilder();
+        StatusLine statusLine = response.getStatusLine();
+        builder.append("Status: ").append(statusLine.toString()).append(System.lineSeparator());
+        builder.append("Response Headers: ");
+        Arrays.stream(response.getAllHeaders()).forEach(i->builder.append(i.toString()).append(System.lineSeparator()));
+        String entity = null;
+        try {
+            entity = convertEntityToString(response.getEntity());
+            builder.append(entity);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        builder.append(System.lineSeparator())
+                .append("Cookies: ")
+                .append(beautifyCookies(context.getCookieStore()))
+                .append(System.lineSeparator());
+        try {
+            outputStream.write(builder.toString().getBytes());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
 
-        boolean needsQuestion = true;
-        for (Map.Entry<String, String> item : map.entrySet()) {
+        return entity;
+    }
 
-            String key = URLEncoder.encode(item.getKey(), StandardCharsets.UTF_8);
-            String value = URLEncoder.encode(item.getValue(), StandardCharsets.UTF_8);
-
-            if (needsQuestion) {
-                needsQuestion = false;
-                builder.append("?").append(key).append("=").append(value);
-            } else {
-                builder.append("&").append(key).append("=").append(value);
-            }
-
+    private static String beautifyCookies(CookieStore cookies){
+        List<Cookie> list = cookies.getCookies();
+        StringBuilder builder = new StringBuilder();
+        for(Cookie cookie : list){
+            builder.append(cookie.toString()).append(System.lineSeparator());
         }
         return builder.toString();
-    }*/
+    }
+
+    public String getVerificationToken(String string) {
+        Document jDoc = Jsoup.parse(string);
+        return jDoc.select("input[name=__RequestVerificationToken]").first().val();
+    }
+
 }
