@@ -1,0 +1,73 @@
+defined in site.min.js
+
+DEP_ACCOUNT_API_URL:"/api/account/v7"
+DEP_API_URL:"https://api.shoprite.com"
+DEP_APP_KEY:undefined
+DEP_CART_API_URL:"/api/cart/v7"
+DEP_CHECKOUT_API_URL:"/api/checkout/v7"
+DEP_DOMAIN:".shoprite.com"
+DEP_SHOP_ACCOUNT_URL:"https://shop.shoprite.com/chain/FBFB139/User/Account"
+DEP_SHOP_CHAIN_URL:"https://shop.shoprite.com/chain/FBFB139"
+DEP_SHOP_CHANGESTORE_URL:"https://shop.shoprite.com/chain/FBFB139?hash=locator"
+DEP_SHOP_EDITCART_URL:"https://shop.shoprite.com/chain/FBFB139?hash=cart"
+DEP_SHOP_REGISTER_URL:"https://shop.shoprite.com/chain/FBFB139/User/Register?destination=https://www.shoprite.com/"
+DEP_SHOP_SIGNIN_URL:"https://shop.shoprite.com/chain/FBFB139/User/QuickSignIn?destination=https://www.shoprite.com/"
+DEP_SHOP_SIGNOUT_URL:"https://shop.shoprite.com/chain/FBFB139/User/SignOut"
+DEP_SHOP_URL:"https://shop.shoprite.com"
+DEP_SHOP_WEEKLY_FLYER_URL:"https://shop.shoprite.com/chain/FBFB139?hash=circular/Weekly"
+DEP_SI_API_URL:"https://secure.shoprite.com"
+DEP_SI_AUTH_COOKIE:"MWG_GSA_S"
+DEP_STORES_API_URL:"/api/stores/v7"
+DEP_STORE_CONF_COOKIE:"MWG_GSA_STCF"
+DEP_STORE_ID_COOKIE:"MWG_GSA_STRID"
+ENV:"production"
+WFC_AUTH_COOKIE:"MWG_WFC_AUTH"
+WFC_CHAIN_ID:"FBFB139"
+WFC_STORE_GROUP_ID:"3601"
+addOrReplaceObj:ƒ addOrReplaceObj(from, to)
+deleteCookie:ƒ deleteCookie(name)
+deleteStoreCookie:ƒ deleteStoreCookie()
+dumpDataCb:ƒ (data)
+getAuthToken:ƒ getAuthToken()
+getCartSummary:ƒ getCartSummary()
+getChangeOrder:ƒ getChangeOrder()
+getCities:ƒ getCities()
+getCookie:ƒ getCookie(cname)
+getDarrellsDeal:ƒ getDarrellsDeal(storeId)
+getInitiatives:ƒ getInitiatives(storeId, count)
+getMyLocalStore:ƒ getMyLocalStore(storeId)
+getMyLocalStores:ƒ getMyLocalStores()
+getNewAuthToken:ƒ getNewAuthToken()
+getNutritionist:ƒ getNutritionist(storeId)
+getPharmacist:ƒ getPharmacist(storeId)
+getProducts:ƒ getProducts(storeId, count)
+getRegions:ƒ getRegions()
+getStore:ƒ getStore(storeId)
+getStoreId:ƒ getStoreId()
+getStoreInfo:ƒ getStoreInfo(storeid)
+getStoreSection:ƒ getStoreSection( store, sectionName )
+getStores:ƒ getStores()
+getSuppliers:ƒ getSuppliers(storeId, count)
+getUserInfo:ƒ getUserInfo()
+hasCookie:ƒ hasCookie(name)
+hasStoreConfCookie:ƒ hasStoreConfCookie()
+isAdminPanel:ƒ isAdminPanel()
+isFeed:ƒ isFeed()
+requestCartSummary:ƒ requestCartSummary()
+requestChangeOrder:ƒ requestChangeOrder()
+setCookie:ƒ setCookie(name, value, expires)
+setStoreCookie:ƒ setStoreCookie(storeId)
+setStoreId:ƒ setStoreId(newStoreId)
+wfc_API_URL:"https://www.shoprite.com/ajax"
+wfc_DARRELLS_DEALS_API_URL:"/darrells-deals"
+wfc_FRESH_SOLUTIONS_CPT_API_URL:"/recipes"
+wfc_HOW_IT_WORKS_API_URL:"/how-it-works"
+wfc_INITIATIVES_API_URL:"/initiatives"
+wfc_NUTRITIONIST_API_URL:"/nutritionists"
+wfc_PHARMACIST_API_URL:"/pharmacists"
+wfc_PRODUCTS_API_URL:"/products"
+wfc_SESSION_API_URL:"/session"
+wfc_STORES_API_URL:"/stores"
+wfc_STORE_INFO_API_URL:"/store-info"
+wfc_SUPPLIERS_API_URL:"/suppliers"
+wfc_WP_URL:"https://www.shoprite.com"

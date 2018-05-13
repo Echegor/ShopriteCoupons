@@ -7,6 +7,10 @@ version '1.0-SNAPSHOT'
 
 mainClassName = 'com.archelo.coupons.Main'
 
+applicationDefaultJvmArgs = ["-Dlog4j.category.org.apache.http.wire=DEBUG",
+"-Dorg.apache.commons.logging.simplelog.log.httpclient.wire=debug",
+"-Dorg.apache.commons.logging.simplelog.log.org.apache.commons.httpclient=debug"]
+
 sourceCompatibility = 1.8
 
 repositories {
