@@ -1,12 +1,15 @@
 package com.archelo.coupons;
 
 public class ShopriteURLS {
-    public static final String HOME = "https://www.shoprite.com";
-    public static final String AUTHENTICATION = "https://secure.shoprite.com/User/Authenticate";
+    public static final String HOME = "https://shop.shoprite.com/store/DFA0738";
+    public static final String QUICK_SIGN_IN = "https://shop.shoprite.com/store/DFA0738/User/QuickSignIn";
+    public static final String AUTHENTICATE3601 = "https://secure.shoprite.com/User/Authenticate/3601";
+    public static final String AUTHENTICATE = "https://secure.shoprite.com/User/Authenticate";
     public static final String SIGN_IN = "https://secure.shoprite.com/User/SignIn/3601";
-    public static final String COUPONS = "https://coupons.shoprite.com/";
+    public static final String COUPONS = "http://coupons.shoprite.com";
     public static final String COUPON_QUERY = "https://stagingcouponswest.azure-mobile.net/tables/ecry_cp_couponid_a_c_for_card";
-    public static final String SIGNED_IN = "https://secure.shoprite.com/Account/DoneEditing/3601";
+    public static final String DONE_EDITING = "https://secure.shoprite.com/Account/DoneEditing/3601";
+    public static final String SIGN_IN_SUCCESS = "https://shop.shoprite.com/store/DFA0738/User/QuickSignIn?success=True?binding=urn:oasis:names:tc:SAML:2.0:bindings:HTTP-POST";
 
 
 }
