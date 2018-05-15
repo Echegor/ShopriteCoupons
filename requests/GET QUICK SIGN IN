@@ -1,0 +1,49 @@
+Tue May 15 14:29:25 EDT 2018 GETTING
+GET request GET https://shop.shoprite.com/store/DFA0738/User/QuickSignIn HTTP/1.1
+GET Headers Host: shop.shoprite.com
+
+2018/05/15 14:29:26:014 EDT [DEBUG] RequestAddCookies - CookieSpec selected: default
+2018/05/15 14:29:26:068 EDT [DEBUG] wire - http-outgoing-0 >> "CONNECT shop.shoprite.com:443 HTTP/1.1[\r][\n]"
+2018/05/15 14:29:26:068 EDT [DEBUG] wire - http-outgoing-0 >> "Host: shop.shoprite.com[\r][\n]"
+2018/05/15 14:29:26:068 EDT [DEBUG] wire - http-outgoing-0 >> "User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:60.0) Gecko/20100101 Firefox/60.0[\r][\n]"
+2018/05/15 14:29:26:068 EDT [DEBUG] wire - http-outgoing-0 >> "[\r][\n]"
+2018/05/15 14:29:26:154 EDT [DEBUG] wire - http-outgoing-0 << "HTTP/1.1 200 Connection Established[\r][\n]"
+2018/05/15 14:29:26:154 EDT [DEBUG] wire - http-outgoing-0 << "Connection: Keep-Alive[\r][\n]"
+2018/05/15 14:29:26:154 EDT [DEBUG] wire - http-outgoing-0 << "Proxy-Connection: Keep-Alive[\r][\n]"
+2018/05/15 14:29:26:154 EDT [DEBUG] wire - http-outgoing-0 << "[\r][\n]"
+2018/05/15 14:29:27:074 EDT [DEBUG] wire - http-outgoing-0 >> "GET /store/DFA0738/User/QuickSignIn HTTP/1.1[\r][\n]"
+2018/05/15 14:29:27:074 EDT [DEBUG] wire - http-outgoing-0 >> "Host: shop.shoprite.com[\r][\n]"
+2018/05/15 14:29:27:074 EDT [DEBUG] wire - http-outgoing-0 >> "Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,application/json, text/javascript,*/*;q=0.8[\r][\n]"
+2018/05/15 14:29:27:074 EDT [DEBUG] wire - http-outgoing-0 >> "Accept-Encoding: Accept-Encoding[\r][\n]"
+2018/05/15 14:29:27:074 EDT [DEBUG] wire - http-outgoing-0 >> "Accept-Language: en-US,en;q=0.9[\r][\n]"
+2018/05/15 14:29:27:074 EDT [DEBUG] wire - http-outgoing-0 >> "Connection: keep-alive[\r][\n]"
+2018/05/15 14:29:27:075 EDT [DEBUG] wire - http-outgoing-0 >> "Upgrade-Insecure-Requests: 1[\r][\n]"
+2018/05/15 14:29:27:075 EDT [DEBUG] wire - http-outgoing-0 >> "User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:60.0) Gecko/20100101 Firefox/60.0[\r][\n]"
+2018/05/15 14:29:27:075 EDT [DEBUG] wire - http-outgoing-0 >> "[\r][\n]"
+2018/05/15 14:29:27:234 EDT [DEBUG] wire - http-outgoing-0 << "HTTP/1.1 200 OK[\r][\n]"
+2018/05/15 14:29:27:234 EDT [DEBUG] wire - http-outgoing-0 << "Cache-Control: no-cache, no-store[\r][\n]"
+2018/05/15 14:29:27:234 EDT [DEBUG] wire - http-outgoing-0 << "Pragma: no-cache[\r][\n]"
+2018/05/15 14:29:27:234 EDT [DEBUG] wire - http-outgoing-0 << "Content-Type: text/html[\r][\n]"
+2018/05/15 14:29:27:234 EDT [DEBUG] wire - http-outgoing-0 << "Expires: -1[\r][\n]"
+2018/05/15 14:29:27:234 EDT [DEBUG] wire - http-outgoing-0 << "Server: Microsoft-IIS/8.5[\r][\n]"
+2018/05/15 14:29:27:235 EDT [DEBUG] wire - http-outgoing-0 << "X-Powered-By: ASP.NET[\r][\n]"
+2018/05/15 14:29:27:235 EDT [DEBUG] wire - http-outgoing-0 << "X-Server: 08[\r][\n]"
+2018/05/15 14:29:27:235 EDT [DEBUG] wire - http-outgoing-0 << "X-UA-Compatible: IE=edge,chrome=1[\r][\n]"
+2018/05/15 14:29:27:235 EDT [DEBUG] wire - http-outgoing-0 << "Date: Tue, 15 May 2018 18:29:26 GMT[\r][\n]"
+2018/05/15 14:29:27:235 EDT [DEBUG] wire - http-outgoing-0 << "Content-Length: 4009[\r][\n]"
+2018/05/15 14:29:27:235 EDT [DEBUG] wire - http-outgoing-0 << "[\r][\n]"
+2018/05/15 14:29:27:236 EDT [DEBUG] wire - http-outgoing-0 << "<html xmlns="http://www.w3.org/1999/xhtml"><body onload="document.forms.samlform.submit()"><noscript><p><strong>Note:</strong> Since your browser does not support Javascript, you must press the Continue button once to proceed.</p></noscript><form id="samlform" action="https://secure.shoprite.com/User/Authenticate/3601?binding=urn%3aoasis%3anames%3atc%3aSAML%3a2.0%3abindings%3aHTTP-POST&cancelUri=https%3a%2f%2fshop.shoprite.com%2fstore%2fDFA0738%2fUser%2fQuickSignIn%3fsuccess%3dFalse" method="post"><div><input type="hidden" name="SAMLRequest" value="PHNhbWxwOkF1dGhuUmVxdWVzdCBJRD0iX2YzMzMyNTUxLTVkYjgtNGFjYi1iOGQwLWY5ODhjYjg5OWYwZSIgVmVyc2lvbj0iMi4wIiBJc3N1ZUluc3RhbnQ9IjIwMTgtMDUtMTVUMTg6Mjk6MjcuMTVaIiBEZXN0aW5hdGlvbj0iaHR0cHM6Ly9zZWN1cmUuc2hvcHJpdGUuY29tL1VzZXIvQXV0aGVudGljYXRlLzM2MDE/YmluZGluZz11cm4lM2FvYXNpcyUzYW5hbWVzJTNhdGMlM2FTQU1MJTNhMi4wJTNhYmluZGluZ3MlM2FIVFRQLVBPU1QmYW1wO2NhbmNlbFVyaT1odHRwcyUzYSUyZiUyZnNob3Auc2hvcHJpdGUuY29tJTJmc3RvcmUlMmZERkEwNzM4JTJmVXNlciUyZlF1aWNrU2lnbkluJTNmc3VjY2VzcyUzZEZhbHNlIiBGb3JjZUF1dGhuPSJmYWxzZSIgSXNQYXNzaXZlPSJmYWxzZSIgUHJvdG9jb2xCaW5kaW5nPSJ1cm46b2FzaXM6bmFtZXM6dGM6U0FNTDoyLjA6YmluZGluZ3M6SFRUUC1QT1NUIiBBc3NlcnRpb25Db25zdW1lclNlcnZpY2VVUkw9Imh0dHBzOi8vc2hvcC5zaG9wcml0ZS5jb20vc3RvcmUvREZBMDczOC9Vc2VyL1F1aWNrU2lnbkluP3N1Y2Nlc3M9VHJ1ZT9iaW5kaW5nPXVybjpvYXNpczpuYW1lczp0YzpTQU1MOjIuMDpiaW5kaW5nczpIVFRQLVBPU1QiIHhtbG5zOnNhbWxwPSJ1cm46b2FzaXM6bmFtZXM6dGM6U0FNTDoyLjA6cHJvdG9jb2wiPjxzYW1sOklzc3VlciB4bWxuczpzYW1sPSJ1cm46b2FzaXM6bmFtZXM6dGM6U0FNTDoyLjA6YXNzZXJ0aW9uIj5odHRwczovL3Nob3Auc2hvcHJpdGUuY29tL3N0b3JlL0RGQTA3Mzg8L3NhbWw6SXNzdWVyPjxTaWduYXR1cmUgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvMDkveG1sZHNpZyMiPjxTaWduZWRJbmZvPjxDYW5vbmljYWxpemF0aW9uTWV0aG9kIEFsZ29yaXRobT0iaHR0cDovL3d3dy53My5vcmcvMjAwMS8xMC94bWwtZXhjLWMxNG4jIiAvPjxTaWduYXR1cmVNZXRob2QgQWxnb3JpdGhtPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwLzA5L3htbGRzaWcjcnNhLXNoYTEiIC8+PFJlZmVyZW5jZSBVUkk9IiNfZjMzMzI1NTEtNWRiOC00YWNiLWI4ZDAtZjk4OGNiODk5ZjBlIj48VHJhbnNmb3Jtcz48VHJhbnNmb3JtIEFsZ29yaXRobT0iaHR0cDovL3d3dy53My5vcmcvMjAwMC8wOS94bWxkc2lnI2VudmVsb3BlZC1zaWduYXR1cmUiIC8+PFRyYW5zZm9ybSBBbGdvcml0aG09Imh0dHA6Ly93d3cudzMub3JnLzIwMDEvMTAveG1sLWV4Yy1jMTRuIyI+PEluY2x1c2l2ZU5hbWVzcGFjZXMgUHJlZml4TGlzdD0iI2RlZmF1bHQgc2FtbHAgc2FtbCBkcyB4cyB4c2kiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAxLzEwL3htbC1leGMtYzE0biMiIC8+PC9UcmFuc2Zvcm0+PC9UcmFuc2Zvcm1zPjxEaWdlc3RNZXRob2QgQWxnb3JpdGhtPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwLzA5L3htbGRzaWcjc2hhMSIgLz48RGlnZXN0VmFsdWU+TnFLT2ROdnN3YWZtQ2d6cDhIb2Zqd2NQY0NvPTwvRGlnZXN0VmFsdWU+PC9SZWZlcmVuY2U+PC9TaWduZWRJbmZvPjxTaWduYXR1cmVWYWx1ZT5NaVRzN3pPdHFzYXVSY1NqY0l6dXMzdlpERkN2YW5mSXZYM2lPRG43b0RaZjNKMGdNUWl3VnV6M3JSa0NhYWo4NUxjVk1zd0NDY3hPNUpsN09OQ2FOVGRpSVZhaGZuNzZyeWE1R3FnS21NSUdnRk83aVVITStOeXBzQXhhWVNjWW92R0ozU3hCWVRTc25rNk1OOFAzK04xUU1kQWpUWUlOa2gwSk1udTlqdmM9PC9TaWduYXR1cmVWYWx1ZT48S2V5SW5mbz48WDUwOURhdGE+PFg1MDlDZXJ0aWZpY2F0ZT5NSUlCdnpDQ0FXMmdBd0lCQWdJUW9xbEJveEhLdm90R2xwbzUvK1E0WHpBSkJnVXJEZ01DSFFVQU1CWXhGREFTQmdOVkJBTVRDMUp2YjNRZ1FXZGxibU41TUI0WERURXhNRFl5T1RJd05EUTFObG9YRFRNNU1USXpNVEl6TlRrMU9Wb3dJakVnTUI0R0ExVUVBeE1YVFhsWFpXSkhjbTlqWlhJdVRYbFhaV0pIY205alpYSXdnWjh3RFFZSktvWklodmNOQVFFQkJRQURnWTBBTUlHSkFvR0JBTTJxYlh3WURyZE41dWkvbnJkYmloZHFwUmhxK2xsbmtTRVpHWXF0RllKQ2lLOGtYWFljWGtCcTZuS2tlNU9GdVF2dnpCRTRzRHBDUVdNVnNCNy9vRmYrYm9sKzZocEhHNFgrSTZZSHRYVjVoenVoWWhJbzE2QXlwQXU3cGs0dEJCaWFXblF3UnROMWNqRitQbldJQUFjYkZlN2ZudHVxL1YzMFNRdHNmWUNIQWdNQkFBR2pTekJKTUVjR0ExVWRBUVJBTUQ2QUVCTGtDUzBHSFIxUEFJMWhJZHdXWkdPaEdEQVdNUlF3RWdZRFZRUURFd3RTYjI5MElFRm5aVzVqZVlJUUJqZHNBS29BWklvUno3alVxbHcxOURBSkJnVXJEZ01DSFFVQUEwRUFFbTdJR3BEMTR5S0pxR2hjNzZza3ZoYUxveVcrSFhtUFg2UnR5WWJIU3lGQ0dDeUlaSS9MOVhNY25zNzJ2Y2N2US8xZ0EzbjZKc0pDSmU2WjVHaWMyUT09PC9YNTA5Q2VydGlmaWNhdGU+PC9YNTA5RGF0YT48L0tleUluZm8+PC9TaWduYXR1cmU+PHNhbWxwOk5hbWVJRFBvbGljeSBBbGxvd0NyZWF0ZT0idHJ1ZSIgLz48L3NhbWxwOkF1dGhuUmVxdWVzdD4="/><input type="hidden" name="RelayState" value="f16d68af-5a10-4844-bdde-c8c26bc8442a"/></div><noscript><div><input type="submit" value="Continue"/></div></noscript></form></body></html>"
+Response:
+Status: HTTP/1.1 200 OK
+Response Headers: Cache-Control: no-cache, no-store
+Pragma: no-cache
+Content-Type: text/html
+Expires: -1
+Server: Microsoft-IIS/8.5
+X-Powered-By: ASP.NET
+X-Server: 08
+X-UA-Compatible: IE=edge,chrome=1
+Date: Tue, 15 May 2018 18:29:26 GMT
+Content-Length: 4009
+
+Cookies:

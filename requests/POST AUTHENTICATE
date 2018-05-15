@@ -1,0 +1,112 @@
+Tue May 15 14:29:28 EDT 2018 POSTING
+POST request POST https://secure.shoprite.com/User/Authenticate HTTP/1.1
+POST Headers Host: secure.shoprite.com
+Origin: https://secure.shoprite.com
+Referer: https://secure.shoprite.com/User/SignIn/3601
+
+2018/05/15 14:29:28:760 EDT [DEBUG] RequestAddCookies - CookieSpec selected: default
+2018/05/15 14:29:28:760 EDT [DEBUG] RequestAddCookies - Cookie [version: 0][name: ID_CANCEL][value: https://shop.shoprite.com/store/DFA0738/User/QuickSignIn?success=False][domain: secure.shoprite.com][path: /][expiry: null] match [(secure)secure.shoprite.com:443/User/Authenticate]
+2018/05/15 14:29:28:760 EDT [DEBUG] RequestAddCookies - Cookie [version: 0][name: ID_SAML_3601][value: 8220a669-196e-4740-b6d6-96e3b88cbc7a][domain: secure.shoprite.com][path: /][expiry: null] match [(secure)secure.shoprite.com:443/User/Authenticate]
+2018/05/15 14:29:28:761 EDT [DEBUG] RequestAddCookies - Cookie [version: 0][name: ID_SG][value: 3601][domain: secure.shoprite.com][path: /][expiry: Tue May 15 14:44:28 EDT 2018] match [(secure)secure.shoprite.com:443/User/Authenticate]
+2018/05/15 14:29:28:761 EDT [DEBUG] RequestAddCookies - Cookie [version: 0][name: ID_SendToSPOnCompletion][value: False][domain: secure.shoprite.com][path: /][expiry: null] match [(secure)secure.shoprite.com:443/User/Authenticate]
+2018/05/15 14:29:28:761 EDT [DEBUG] RequestAddCookies - Cookie [version: 0][name: __RequestVerificationToken][value: QzzOCjRhEVcNvDP24jReDyXTFQv0iwK1594n_ggkoUAn-urCnqgZxR-9hypfNde2S8KiOrKu0vzN-OWNcsISWtWblbA1][domain: secure.shoprite.com][path: /][expiry: null] match [(secure)secure.shoprite.com:443/User/Authenticate]
+2018/05/15 14:29:28:761 EDT [DEBUG] wire - http-outgoing-1 >> "POST /User/Authenticate HTTP/1.1[\r][\n]"
+2018/05/15 14:29:28:761 EDT [DEBUG] wire - http-outgoing-1 >> "Host: secure.shoprite.com[\r][\n]"
+2018/05/15 14:29:28:761 EDT [DEBUG] wire - http-outgoing-1 >> "Origin: https://secure.shoprite.com[\r][\n]"
+2018/05/15 14:29:28:761 EDT [DEBUG] wire - http-outgoing-1 >> "Referer: https://secure.shoprite.com/User/SignIn/3601[\r][\n]"
+2018/05/15 14:29:28:761 EDT [DEBUG] wire - http-outgoing-1 >> "Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,application/json, text/javascript,*/*;q=0.8[\r][\n]"
+2018/05/15 14:29:28:761 EDT [DEBUG] wire - http-outgoing-1 >> "Accept-Encoding: Accept-Encoding[\r][\n]"
+2018/05/15 14:29:28:761 EDT [DEBUG] wire - http-outgoing-1 >> "Accept-Language: en-US,en;q=0.9[\r][\n]"
+2018/05/15 14:29:28:761 EDT [DEBUG] wire - http-outgoing-1 >> "Connection: keep-alive[\r][\n]"
+2018/05/15 14:29:28:761 EDT [DEBUG] wire - http-outgoing-1 >> "Upgrade-Insecure-Requests: 1[\r][\n]"
+2018/05/15 14:29:28:761 EDT [DEBUG] wire - http-outgoing-1 >> "Content-Length: 225[\r][\n]"
+2018/05/15 14:29:28:761 EDT [DEBUG] wire - http-outgoing-1 >> "Content-Type: application/x-www-form-urlencoded; charset=ISO-8859-1[\r][\n]"
+2018/05/15 14:29:28:761 EDT [DEBUG] wire - http-outgoing-1 >> "User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:60.0) Gecko/20100101 Firefox/60.0[\r][\n]"
+2018/05/15 14:29:28:762 EDT [DEBUG] wire - http-outgoing-1 >> "Cookie: ID_CANCEL=https://shop.shoprite.com/store/DFA0738/User/QuickSignIn?success=False; ID_SAML_3601=8220a669-196e-4740-b6d6-96e3b88cbc7a; ID_SG=3601; ID_SendToSPOnCompletion=False; __RequestVerificationToken=QzzOCjRhEVcNvDP24jReDyXTFQv0iwK1594n_ggkoUAn-urCnqgZxR-9hypfNde2S8KiOrKu0vzN-OWNcsISWtWblbA1[\r][\n]"
+2018/05/15 14:29:28:762 EDT [DEBUG] wire - http-outgoing-1 >> "[\r][\n]"
+2018/05/15 14:29:28:762 EDT [DEBUG] wire - http-outgoing-1 >> "__RequestVerificationToken=cY39RegJmd6u93eokSi0wd3Cz_o_uM3JgfwSLm-paTkU1Vh2XaX8sGvZpADFDABPXB0RI8lPlz5vCXZjXEKfR4H5M-U1&Email=xarchelo%40live.com&Password=luis2303&StoreGroupId=3601&ReturnUrl=https%3A%2F%2Fwww.shoprite.com%2F"
+2018/05/15 14:29:29:123 EDT [DEBUG] wire - http-outgoing-1 << "HTTP/1.1 302 Found[\r][\n]"
+2018/05/15 14:29:29:123 EDT [DEBUG] wire - http-outgoing-1 << "Cache-Control: private[\r][\n]"
+2018/05/15 14:29:29:123 EDT [DEBUG] wire - http-outgoing-1 << "Content-Type: text/html; charset=utf-8[\r][\n]"
+2018/05/15 14:29:29:123 EDT [DEBUG] wire - http-outgoing-1 << "Location: https://www.shoprite.com/[\r][\n]"
+2018/05/15 14:29:29:123 EDT [DEBUG] wire - http-outgoing-1 << "Server: Microsoft-IIS/8.5[\r][\n]"
+2018/05/15 14:29:29:123 EDT [DEBUG] wire - http-outgoing-1 << "Set-Cookie: MWG_Auth_3601=17xO9flf0LRuI2lSZcji6A==\TWzktpIQzl5p25i5+6s48JdLUBuoJJ/+iPNxO7on8jFb8Zirjcr1ZyCeB1cOi+vCUEu9I5uBkdXza0nOd4DFkwZSuaHWHQPhadZ8hdxWWgc=; domain=shoprite.com; path=/; secure[\r][\n]"
+2018/05/15 14:29:29:123 EDT [DEBUG] wire - http-outgoing-1 << "Set-Cookie: ID_EXTERNAUTH=Authenticated=False&NewReg=False&ExternalAuthProvider=; domain=shoprite.com; expires=Wed, 16-May-2018 18:29:29 GMT; path=/[\r][\n]"
+2018/05/15 14:29:29:123 EDT [DEBUG] wire - http-outgoing-1 << "X-Powered-By: ASP.NET[\r][\n]"
+2018/05/15 14:29:29:124 EDT [DEBUG] wire - http-outgoing-1 << "X-Server: 06[\r][\n]"
+2018/05/15 14:29:29:124 EDT [DEBUG] wire - http-outgoing-1 << "Date: Tue, 15 May 2018 18:29:28 GMT[\r][\n]"
+2018/05/15 14:29:29:124 EDT [DEBUG] wire - http-outgoing-1 << "Content-Length: 142[\r][\n]"
+2018/05/15 14:29:29:124 EDT [DEBUG] wire - http-outgoing-1 << "[\r][\n]"
+2018/05/15 14:29:29:129 EDT [DEBUG] wire - http-outgoing-1 << "<html><head><title>Object moved</title></head><body>[\r][\n]"
+2018/05/15 14:29:29:129 EDT [DEBUG] wire - http-outgoing-1 << "<h2>Object moved to <a href="https://www.shoprite.com/">here</a>.</h2>[\r][\n]"
+2018/05/15 14:29:29:130 EDT [DEBUG] wire - http-outgoing-1 << "</body></html>[\r][\n]"
+2018/05/15 14:29:29:130 EDT [DEBUG] ResponseProcessCookies - Cookie accepted [MWG_Auth_3601="17xO9flf0LRuI2lSZcji6A==\TWzktpIQzl5p25i5+6s48JdLUBuoJJ/+iPNxO7on8jFb8Zirjcr1ZyCeB1cOi+vCUEu9I5uBkdX...", version:0, domain:shoprite.com, path:/, expiry:null]
+2018/05/15 14:29:29:131 EDT [DEBUG] ResponseProcessCookies - Cookie accepted [ID_EXTERNAUTH="Authenticated=False&NewReg=False&ExternalAuthProvider=", version:0, domain:shoprite.com, path:/, expiry:Wed May 16 14:29:29 EDT 2018]
+2018/05/15 14:29:29:132 EDT [DEBUG] RequestAddCookies - CookieSpec selected: default
+2018/05/15 14:29:29:132 EDT [DEBUG] RequestAddCookies - Cookie [version: 0][name: ID_EXTERNAUTH][value: Authenticated=False&NewReg=False&ExternalAuthProvider=][domain: shoprite.com][path: /][expiry: Wed May 16 14:29:29 EDT 2018] match [(secure)www.shoprite.com:443/]
+2018/05/15 14:29:29:132 EDT [DEBUG] RequestAddCookies - Cookie [version: 0][name: MWG_Auth_3601][value: 17xO9flf0LRuI2lSZcji6A==\TWzktpIQzl5p25i5+6s48JdLUBuoJJ/+iPNxO7on8jFb8Zirjcr1ZyCeB1cOi+vCUEu9I5uBkdXza0nOd4DFkwZSuaHWHQPhadZ8hdxWWgc=][domain: shoprite.com][path: /][expiry: null] match [(secure)www.shoprite.com:443/]
+2018/05/15 14:29:29:134 EDT [DEBUG] wire - http-outgoing-2 >> "CONNECT www.shoprite.com:443 HTTP/1.1[\r][\n]"
+2018/05/15 14:29:29:134 EDT [DEBUG] wire - http-outgoing-2 >> "Host: www.shoprite.com[\r][\n]"
+2018/05/15 14:29:29:134 EDT [DEBUG] wire - http-outgoing-2 >> "User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:60.0) Gecko/20100101 Firefox/60.0[\r][\n]"
+2018/05/15 14:29:29:134 EDT [DEBUG] wire - http-outgoing-2 >> "[\r][\n]"
+2018/05/15 14:29:29:147 EDT [DEBUG] wire - http-outgoing-2 << "HTTP/1.1 200 Connection Established[\r][\n]"
+2018/05/15 14:29:29:147 EDT [DEBUG] wire - http-outgoing-2 << "Connection: Keep-Alive[\r][\n]"
+2018/05/15 14:29:29:147 EDT [DEBUG] wire - http-outgoing-2 << "Proxy-Connection: Keep-Alive[\r][\n]"
+2018/05/15 14:29:29:147 EDT [DEBUG] wire - http-outgoing-2 << "[\r][\n]"
+2018/05/15 14:29:29:237 EDT [DEBUG] wire - http-outgoing-2 >> "GET / HTTP/1.1[\r][\n]"
+2018/05/15 14:29:29:237 EDT [DEBUG] wire - http-outgoing-2 >> "Host: secure.shoprite.com[\r][\n]"
+2018/05/15 14:29:29:237 EDT [DEBUG] wire - http-outgoing-2 >> "Origin: https://secure.shoprite.com[\r][\n]"
+2018/05/15 14:29:29:237 EDT [DEBUG] wire - http-outgoing-2 >> "Referer: https://secure.shoprite.com/User/SignIn/3601[\r][\n]"
+2018/05/15 14:29:29:237 EDT [DEBUG] wire - http-outgoing-2 >> "Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,application/json, text/javascript,*/*;q=0.8[\r][\n]"
+2018/05/15 14:29:29:237 EDT [DEBUG] wire - http-outgoing-2 >> "Accept-Encoding: Accept-Encoding[\r][\n]"
+2018/05/15 14:29:29:237 EDT [DEBUG] wire - http-outgoing-2 >> "Accept-Language: en-US,en;q=0.9[\r][\n]"
+2018/05/15 14:29:29:237 EDT [DEBUG] wire - http-outgoing-2 >> "Connection: keep-alive[\r][\n]"
+2018/05/15 14:29:29:237 EDT [DEBUG] wire - http-outgoing-2 >> "Upgrade-Insecure-Requests: 1[\r][\n]"
+2018/05/15 14:29:29:237 EDT [DEBUG] wire - http-outgoing-2 >> "User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:60.0) Gecko/20100101 Firefox/60.0[\r][\n]"
+2018/05/15 14:29:29:237 EDT [DEBUG] wire - http-outgoing-2 >> "Cookie: ID_EXTERNAUTH=Authenticated=False&NewReg=False&ExternalAuthProvider=; MWG_Auth_3601=17xO9flf0LRuI2lSZcji6A==\TWzktpIQzl5p25i5+6s48JdLUBuoJJ/+iPNxO7on8jFb8Zirjcr1ZyCeB1cOi+vCUEu9I5uBkdXza0nOd4DFkwZSuaHWHQPhadZ8hdxWWgc=[\r][\n]"
+2018/05/15 14:29:29:237 EDT [DEBUG] wire - http-outgoing-2 >> "[\r][\n]"
+2018/05/15 14:29:29:328 EDT [DEBUG] wire - http-outgoing-2 << "HTTP/1.1 301 Moved Permanently[\r][\n]"
+2018/05/15 14:29:29:328 EDT [DEBUG] wire - http-outgoing-2 << "Date: Tue, 15 May 2018 18:29:29 GMT[\r][\n]"
+2018/05/15 14:29:29:328 EDT [DEBUG] wire - http-outgoing-2 << "Server: Apache/2.2.15 (CentOS)[\r][\n]"
+2018/05/15 14:29:29:328 EDT [DEBUG] wire - http-outgoing-2 << "X-Powered-By: PHP/5.6.26[\r][\n]"
+2018/05/15 14:29:29:328 EDT [DEBUG] wire - http-outgoing-2 << "Location: https://www.shoprite.com/[\r][\n]"
+2018/05/15 14:29:29:330 EDT [DEBUG] wire - http-outgoing-2 << "X-serverID: 15[\r][\n]"
+2018/05/15 14:29:29:330 EDT [DEBUG] wire - http-outgoing-2 << "Content-Length: 0[\r][\n]"
+2018/05/15 14:29:29:330 EDT [DEBUG] wire - http-outgoing-2 << "Connection: close[\r][\n]"
+2018/05/15 14:29:29:330 EDT [DEBUG] wire - http-outgoing-2 << "Content-Type: text/html; charset=UTF-8[\r][\n]"
+2018/05/15 14:29:29:332 EDT [DEBUG] wire - http-outgoing-2 << "[\r][\n]"
+org.apache.http.client.ClientProtocolException
+	at org.apache.http.impl.client.InternalHttpClient.doExecute(InternalHttpClient.java:187)
+	at org.apache.http.impl.client.CloseableHttpClient.execute(CloseableHttpClient.java:83)
+	at org.apache.http.impl.client.CloseableHttpClient.execute(CloseableHttpClient.java:56)
+	at com.archelo.coupons.HTTPHandler.doURLEncodedPost(HTTPHandler.java:205)
+	at com.archelo.coupons.Main.doPost(Main.java:83)
+	at com.archelo.coupons.Main.main(Main.java:45)
+Caused by: org.apache.http.client.CircularRedirectException: Circular redirect to 'https://www.shoprite.com/'
+	at org.apache.http.impl.client.DefaultRedirectStrategy.getLocationURI(DefaultRedirectStrategy.java:177)
+	at org.apache.http.impl.client.DefaultRedirectStrategy.getRedirect(DefaultRedirectStrategy.java:221)
+	at org.apache.http.impl.execchain.RedirectExec.execute(RedirectExec.java:122)
+	at org.apache.http.impl.client.InternalHttpClient.doExecute(InternalHttpClient.java:185)
+	... 5 more
+Exception in thread "main" java.lang.NullPointerException
+	at com.archelo.coupons.HTTPHandler.printResponse(HTTPHandler.java:251)
+	at com.archelo.coupons.Main.doPost(Main.java:84)
+	at com.archelo.coupons.Main.main(Main.java:45)
+
+> Task :run FAILED
+
+FAILURE: Build failed with an exception.
+
+* What went wrong:
+Execution failed for task ':run'.
+> Process 'command 'C:\Program Files\Java\jdk1.8.0_111\bin\java.exe'' finished with non-zero exit value 1
+
+* Try:
+Run with --stacktrace option to get the stack trace. Run with --info or --debug option to get more log output. Run with --scan to get full insights.
+
+* Get more help at https://help.gradle.org
+
+BUILD FAILED in 4s
+7 actionable tasks: 5 executed, 2 up-to-date
+Process 'command 'C:\Program Files\Java\jdk1.8.0_111\bin\java.exe'' finished with non-zero exit value 1
+2:29:29 PM: Tasks execution finished 'build run'.
