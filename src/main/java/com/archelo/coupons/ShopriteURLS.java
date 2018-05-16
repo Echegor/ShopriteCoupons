@@ -13,7 +13,13 @@ public class ShopriteURLS {
     public static final String SIGN_IN_SUCCESS = "https://shop.shoprite.com/store/0DE0770/User/QuickSignIn?success=True?binding=urn:oasis:names:tc:SAML:2.0:bindings:HTTP-POST";
     public static final String AZURE_SIGN_IN_SUCCESS = "https://wfsso.azurewebsites.net/SRSSO/ReturnFromSignIn?success=True?binding=urn:oasis:names:tc:SAML:2.0:bindings:HTTP-POST";
     public static final String WEB_JS = "http://coupons.shoprite.com/scripts/web.js";
-    public static final String AZURE_SIGN_IN = "https://wfsso.azurewebsites.net/api/v1/sp/sso/sessId/";
+    public static final String AZURE_SESSION = "https://wfsso.azurewebsites.net/api/v1/sp/sso/sessId/";
+    public static final String AZURE_SIGN_IN = "https://wfsso.azurewebsites.net/SRSSO/SignIn";
+    public static final String AZURE_USER_INFO = "https://wfsso.azurewebsites.net/SRSSO/GetUserInfo";
+    public static final String AZURE_RETURN_FROM_SIGN_IN = "https://wfsso.azurewebsites.net/SRSSO/ReturnFromSignIn?success=True?binding=urn:oasis:names:tc:SAML:2.0:bindings:HTTP-POST";
+    public static final String AZURE_AVAILABLE_COUPONS = "https://stagingcouponswest.azure-mobile.net/tables/ecry_cp_couponid_a_c_for_card";
+    public static final String AZURE_COUPONS_METADATA = "https://stagingcouponswest.azure-mobile.net/tables/ecry_cp_couponid_a_c_for_card";
+    public static final String AZURE_COUPONS_ADD = "https://stagingcouponswest.azure-mobile.net/tables/ecry_cp_query_add_to_card";
 
 
 }

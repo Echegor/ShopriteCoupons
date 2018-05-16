@@ -16,12 +16,9 @@ import org.apache.http.impl.client.BasicCookieStore;
 import org.apache.http.impl.client.HttpClientBuilder;
 import org.apache.http.impl.client.LaxRedirectStrategy;
 import org.apache.http.util.EntityUtils;
-import org.jsoup.Jsoup;
-import org.jsoup.nodes.Document;
 
 import java.io.*;
 import java.net.URLEncoder;
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
@@ -63,24 +60,6 @@ public class HTTPHandler {
                 .build();
     }
 
-    public HttpResponse doGet(String url,List<Header> headers) {
-        try {
-            HttpClient httpclient = getDefaultClient();
-            HttpGet httpGet = new HttpGet(url);
-            headers.forEach(httpGet::addHeader);
-            logRequest(httpGet);
-
-            return httpclient.execute(httpGet, context);
-
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
-        return null;
-    }
-
-
-
     public static String convertEntityToString(HttpEntity entity) throws IOException {
         if (entity == null) {
             throw new IOException("null entity");
@@ -95,6 +74,22 @@ public class HTTPHandler {
         }
         //}
 
+    }
+
+    public HttpResponse doGet(String url,List<Header> headers) {
+        try {
+            HttpClient httpclient = getDefaultClient();
+            HttpGet httpGet = new HttpGet(url);
+            headers.forEach(httpGet::addHeader);
+            logRequest(httpGet);
+
+            return httpclient.execute(httpGet, context);
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        return null;
     }
 
     private static String convertInputStreamToString(InputStream inputStream) {
@@ -112,32 +107,7 @@ public class HTTPHandler {
 
     }
 
-    private static String beautifyCookies(CookieStore cookies){
-        List<Cookie> list = cookies.getCookies();
-        StringBuilder builder = new StringBuilder();
-        for(Cookie cookie : list){
-            builder.append(cookie.toString()).append(System.lineSeparator());
-        }
-        return builder.toString();
-    }
-
-    private void logRequest(HttpPost post){
-        System.out.println("POST request " + post.toString());
-        System.out.println("POST Headers " + beautifyHeaders(post.getAllHeaders()));
-    }
-
-    private void logRequest(HttpGet get){
-        System.out.println("GET request " + get.toString());
-        System.out.println("GET Headers " + beautifyHeaders(get.getAllHeaders()));
-    }
-
-    private String beautifyHeaders(Header[] headers){
-        StringBuilder builder = new StringBuilder();
-        Arrays.stream(headers).forEach(i->builder.append(i.toString()).append(System.lineSeparator()));
-        return builder.toString();
-    }
-
-    private static String toURLEncodedString(ArrayList<NameValuePair> list, boolean isData,boolean encode) {
+    private static String toURLEncodedString(List<NameValuePair> list, boolean isData, boolean encode) {
         if (list == null || list.isEmpty())
             return "";
 
@@ -149,11 +119,10 @@ public class HTTPHandler {
             String key = null;
             String value = null;
             try {
-                if(encode){
+                if (encode) {
                     key = URLEncoder.encode(item.getName(), "UTF-8");
                     value = URLEncoder.encode(item.getValue(), "UTF-8");
-                }
-                else{
+                } else {
                     key = item.getName();
                     value = item.getValue();
                 }
@@ -177,35 +146,28 @@ public class HTTPHandler {
         return builder.toString();
     }
 
-    public HttpResponse doURLEncodedPost(String url, List<Header> headers, ArrayList<NameValuePair> queryData, ArrayList<NameValuePair> data) {
-        try {
-            String queryParams = toURLEncodedString(queryData, false,true);
-            String dataParam = toURLEncodedString(data, true,true);
-
-            HttpClient httpclient = getDefaultClient();
-            HttpPost httppost = new HttpPost(url + queryParams);
-            httppost.setEntity(new StringEntity(dataParam,ContentType.APPLICATION_FORM_URLENCODED));
-
-            headers.forEach(httppost::addHeader);
-            logRequest(httppost);
-            return httpclient.execute(httppost, context);
-
-        } catch (IOException e) {
-            e.printStackTrace();
+    private static String beautifyCookies(CookieStore cookies) {
+        List<Cookie> list = cookies.getCookies();
+        StringBuilder builder = new StringBuilder();
+        for (Cookie cookie : list) {
+            builder.append(cookie.toString()).append(System.lineSeparator());
         }
-
-        return null;
+        return builder.toString();
     }
 
+    public void addCookie(Cookie cookie) {
+        cookieStore.addCookie(cookie);
+    }
 
-    public HttpResponse doJsonEncodedPost(String url, JsonObject params) {
+    public HttpResponse doURLUenncodedGet(String url, List<Header> headers, List<NameValuePair> queryParams) {
         try {
+            String query = toURLEncodedString(queryParams, false, false);
             HttpClient httpclient = getDefaultClient();
-            HttpPost httppost = new HttpPost(url);
-            httppost.setEntity(new StringEntity(
-                    params.toString(),
-                    ContentType.APPLICATION_JSON));
-            return httpclient.execute(httppost, context);
+            HttpGet httpGet = new HttpGet(url + query);
+            headers.forEach(httpGet::addHeader);
+            logRequest(httpGet);
+
+            return httpclient.execute(httpGet, context);
 
         } catch (IOException e) {
             e.printStackTrace();
@@ -243,5 +205,97 @@ public class HTTPHandler {
 
         return entity;
     }
+
+    public HttpResponse doURLEncodedGet(String url, List<Header> headers, List<NameValuePair> queryParams) {
+        try {
+            String query = toURLEncodedString(queryParams, false, true);
+            HttpClient httpclient = getDefaultClient();
+            HttpGet httpGet = new HttpGet(url + query);
+            headers.forEach(httpGet::addHeader);
+            logRequest(httpGet);
+
+            return httpclient.execute(httpGet, context);
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        return null;
+    }
+
+    public HttpResponse doURLUnencodedPost(String url, List<Header> headers, List<NameValuePair> queryData, List<NameValuePair> data) {
+        try {
+            String queryParams = toURLEncodedString(queryData, false, false);
+            String dataParam = toURLEncodedString(data, true, true);
+
+            HttpClient httpclient = getDefaultClient();
+            HttpPost httppost = new HttpPost(url + queryParams);
+            httppost.setEntity(new StringEntity(dataParam, ContentType.APPLICATION_FORM_URLENCODED));
+
+            headers.forEach(httppost::addHeader);
+            logRequest(httppost);
+            return httpclient.execute(httppost, context);
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        return null;
+    }
+
+    public HttpResponse doURLEncodedPost(String url, List<Header> headers, List<NameValuePair> queryData, List<NameValuePair> data) {
+        try {
+            String queryParams = toURLEncodedString(queryData, false,true);
+            String dataParam = toURLEncodedString(data, true,true);
+
+            HttpClient httpclient = getDefaultClient();
+            HttpPost httppost = new HttpPost(url + queryParams);
+            httppost.setEntity(new StringEntity(dataParam,ContentType.APPLICATION_FORM_URLENCODED));
+
+            headers.forEach(httppost::addHeader);
+            logRequest(httppost);
+            return httpclient.execute(httppost, context);
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        return null;
+    }
+
+    public HttpResponse doJsonEncodedPost(String url, List<Header> headers, JsonObject params) {
+        try {
+            HttpClient httpclient = getDefaultClient();
+            HttpPost httppost = new HttpPost(url);
+            httppost.setEntity(new StringEntity(
+                    params.toString(),
+                    ContentType.APPLICATION_JSON));
+
+            headers.forEach(httppost::addHeader);
+            return httpclient.execute(httppost, context);
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        return null;
+    }
+
+    private void logRequest(HttpPost post) {
+        System.out.println("POST request " + post.toString());
+        System.out.println("POST Headers " + beautifyHeaders(post.getAllHeaders()));
+    }
+
+    private void logRequest(HttpGet get) {
+        System.out.println("GET request " + get.toString());
+        System.out.println("GET Headers " + beautifyHeaders(get.getAllHeaders()));
+    }
+
+    private String beautifyHeaders(Header[] headers) {
+        StringBuilder builder = new StringBuilder();
+        Arrays.stream(headers).forEach(i -> builder.append(i.toString()).append(System.lineSeparator()));
+        return builder.toString();
+    }
+
 
 }
