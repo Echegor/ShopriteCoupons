@@ -1,7 +1,0 @@
-1. Pull site page.
-2. Parse out t= parameter
-3. Request web.js with t= parameter
-4. Look under the line with customerservice angular controller and parse out the authentication token
-1. Request web.js but first get parameter t= to get a session.
-
-1. auth token is located in web.js

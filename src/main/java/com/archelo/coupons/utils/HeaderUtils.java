@@ -1,6 +1,8 @@
 package com.archelo.coupons.utils;
 
 import com.archelo.coupons.json.AzureToken;
+import com.archelo.coupons.json.LoginStatus;
+import com.google.gson.Gson;
 import org.apache.http.Header;
 import org.apache.http.NameValuePair;
 import org.apache.http.message.BasicHeader;
@@ -62,24 +64,15 @@ public class HeaderUtils {
         return headers;
     }
 
-    public static List<Header> getAzureAuthenticationHeaders3601() {
+    public static List<Header> getAzureAuthenticationHeaders3601(String status) {
+        LoginStatus loginStatus = new Gson().fromJson(status, LoginStatus.class);
         List<Header> headers = new ArrayList<>();
         headers.add(new BasicHeader("Host", "secure.shoprite.com"));
         headers.add(new BasicHeader("Content-Type", "application/x-www-form-urlencoded"));
-        headers.add(new BasicHeader("Referer", "https://wfsso.azurewebsites.net/SRSSO/SignIn?sessId=bce5f9ff-751c-4f6c-b635-a32226356a2d0&returnUrl=http://coupons.shoprite.com/"));
+        headers.add(new BasicHeader("Referer", "https://wfsso.azurewebsites.net/SRSSO/SignIn?sessId=" + loginStatus.getUserId()+ "&returnUrl=http://coupons.shoprite.com/"));
         return headers;
     }
 
-
-    public static ArrayList<NameValuePair> getAuthenticationInfo(String token) {
-        ArrayList<NameValuePair> list = new ArrayList<>();
-        list.add(new BasicNameValuePair("__RequestVerificationToken", token));
-        list.add(new BasicNameValuePair("Email", "xarchelo@live.com"));
-        list.add(new BasicNameValuePair("Password", "luis2303"));
-        list.add(new BasicNameValuePair("StoreGroupId", "3601"));
-        list.add(new BasicNameValuePair("ReturnUrl", ""));
-        return list;
-    }
 
     public static ArrayList<Header> getWebJsHeaders() {
         ArrayList<Header> list = new ArrayList<>();

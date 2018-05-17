@@ -84,7 +84,7 @@ public class ParamUtils {
     public static List<NameValuePair> buildAzureSamlRequestQueryParameters() {
         ArrayList<NameValuePair> samlQueryParams = new ArrayList<>();
         samlQueryParams.add(new BasicNameValuePair("binding", "urn:oasis:names:tc:SAML:2.0:bindings:HTTP-POST"));
-        samlQueryParams.add(new BasicNameValuePair("cancelUri", "cancelUri=https://wfsso.azurewebsites.net/SRSSO/CancelSignIn/store/027F776?success=False"));
+        samlQueryParams.add(new BasicNameValuePair("cancelUri", "https://wfsso.azurewebsites.net/SRSSO/CancelSignIn/store/027F776?success=False"));
         return samlQueryParams;
     }
 
@@ -138,5 +138,25 @@ public class ParamUtils {
         object.addProperty("clip_source", "Web_SR");
         object.addProperty("coupon_id", coupon);
         return object;
+    }
+
+//    public static ArrayList<NameValuePair> getAuthenticationInfo(String token) {
+//        ArrayList<NameValuePair> list = new ArrayList<>();
+//        list.add(new BasicNameValuePair("__RequestVerificationToken", token));
+//        list.add(new BasicNameValuePair("Email", ""));
+//        list.add(new BasicNameValuePair("Password", ""));
+//        list.add(new BasicNameValuePair("StoreGroupId", "3601"));
+//        list.add(new BasicNameValuePair("ReturnUrl", ""));
+//        return list;
+//    }
+
+    public static ArrayList<NameValuePair> getAuthenticationInfo(String token) {
+        ArrayList<NameValuePair> list = new ArrayList<>();
+        list.add(new BasicNameValuePair("__RequestVerificationToken", token));
+        list.add(new BasicNameValuePair("Email", ""));
+        list.add(new BasicNameValuePair("Password", ""));
+        list.add(new BasicNameValuePair("StoreGroupId", "3601"));
+        list.add(new BasicNameValuePair("ReturnUrl", ""));
+        return list;
     }
 }

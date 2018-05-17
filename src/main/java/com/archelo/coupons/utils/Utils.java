@@ -1,21 +1,25 @@
 package com.archelo.coupons.utils;
 
-import com.archelo.coupons.HTTPHandler;
-import com.archelo.coupons.ShopriteURLS;
+import com.archelo.coupons.http.Get;
+import com.archelo.coupons.http.Post;
 import com.archelo.coupons.json.AzureToken;
 import com.archelo.coupons.json.AzureUserInfo;
 import com.archelo.coupons.json.CouponsArray;
+import com.archelo.coupons.urls.AzureUrls;
+import com.archelo.coupons.urls.ShopriteURLS;
 import com.google.gson.Gson;
-import com.google.gson.JsonObject;
 import org.apache.http.Header;
-import org.apache.http.HttpResponse;
-import org.apache.http.NameValuePair;
+import org.apache.http.HttpHost;
+import org.apache.http.client.config.RequestConfig;
+import org.apache.http.client.protocol.HttpClientContext;
+import org.apache.http.entity.ContentType;
+import org.apache.http.impl.client.BasicAuthCache;
+import org.apache.http.impl.client.BasicCookieStore;
 
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.nio.file.StandardOpenOption;
-import java.util.Date;
 import java.util.List;
 
 public class Utils {
@@ -29,101 +33,147 @@ public class Utils {
         }
     }
 
-    public static String doPost(HTTPHandler handler, String url, String filename, List<Header> headers, List<NameValuePair> queryParam, List<NameValuePair> dataParams) {
-        System.out.println(new Date() + " POSTING");
-        HttpResponse response = handler.doURLEncodedPost(url, headers, queryParam, dataParams);
-        String entity = handler.printResponse(response, System.out, false);
-        writeToFile(filename, entity);
-        return entity;
-    }
+    public static void performAzureSignIn() throws IOException {
+        HttpHost proxy = new HttpHost("10.120.30.19", 8080, "http");
+        RequestConfig globalConfig = RequestConfig
+                .custom()
+                .setProxy(proxy)
+                .setCircularRedirectsAllowed(false)
+                .build();
+        HttpClientContext context;
+        context = HttpClientContext.create();
+        context.setCookieStore(new BasicCookieStore());
+        context.setRequestConfig(globalConfig);
+        context.setAuthCache(new BasicAuthCache());
 
-    public static String doURLUnencodedPost(HTTPHandler handler, String url, String filename, List<Header> headers, List<NameValuePair> queryParam, List<NameValuePair> dataParams) {
-        System.out.println(new Date() + " POSTING");
-        HttpResponse response = handler.doURLUnencodedPost(url, headers, queryParam, dataParams);
-        String entity = handler.printResponse(response, System.out, false);
-        writeToFile(filename, entity);
-        return entity;
-    }
+        String status = new Get.GetBuilder()
+                .url(ShopriteURLS.STATUS)
+                .headers(HeaderUtils.getStatus())
+                .httpClientContext(context)
+                .build().doGet();
 
-    public static String doJSONPost(HTTPHandler handler, String url, String filename, List<Header> headers, JsonObject dataParams) {
-        System.out.println(new Date() + " POSTING");
-        HttpResponse response = handler.doJsonEncodedPost(url, headers, dataParams);
-        String entity = handler.printResponse(response, System.out, false);
-        writeToFile(filename, entity);
-        return entity;
-    }
+        logString("status",status,"status.html",false);
 
-    public static String doJSONPostNoFile(HTTPHandler handler, String url, List<Header> headers, JsonObject dataParams) {
-        System.out.println(new Date() + " POSTING");
-        HttpResponse response = handler.doJsonEncodedPost(url, headers, dataParams);
-        String entity = handler.printResponse(response, System.out, false);
-        return entity;
-    }
+        String samlRequest = new Get.GetBuilder()
+                .url(AzureUrls.SIGN_IN)
+                .headers(HeaderUtils.getAzureSignInStatus())
+                .encodeQueryParams(false)
+                .queryParams(ParamUtils.getAzureSignInStatus(status))
+                .httpClientContext(context)
+                .build().doGet();
 
+        logString("samlRequest",samlRequest,"samlRequest.html",false);
 
-    public static String doGet(HTTPHandler handler, String url, String filename, List<Header> headers) {
-        System.out.println(new Date() + " GETTING");
-        HttpResponse response = handler.doGet(url, headers);
-        String entity = handler.printResponse(response, System.out, false);
-        writeToFile(filename, entity);
-        return entity;
-    }
+        String authenticate3601 = new Post.PostBuilder()
+                .url(ShopriteURLS.AUTHENTICATE3601)
+                .headers(HeaderUtils.getAzureAuthenticationHeaders3601(status))
+                .queryParams(ParamUtils.buildAzureSamlRequestQueryParameters())
+                .dataParams(ParamUtils.buildSamlRequestDataParameters(samlRequest))
+                .contentType(ContentType.APPLICATION_FORM_URLENCODED)
+                .httpClientContext(context)
+                .encodeQueryParams(true)
+                .build().doPost();
 
-    public static String doUrlUnencodedGet(HTTPHandler handler, String url, String filename, List<Header> headers, List<NameValuePair> queryParams) {
-        System.out.println(new Date() + " GETTING");
-        HttpResponse response = handler.doURLEncodedGet(url, headers, queryParams);
-        String entity = handler.printResponse(response, System.out, false);
-        writeToFile(filename, entity);
-        return entity;
-    }
+        logString("authenticate3601",authenticate3601,"authenticate3601.html",false);
 
-    public static String doUrlEncodedGet(HTTPHandler handler, String url, String filename, List<Header> headers, List<NameValuePair> queryParams) {
-        System.out.println(new Date() + " GETTING");
-        HttpResponse response = handler.doURLEncodedGet(url, headers, queryParams);
-        String entity = handler.printResponse(response, System.out, false);
-        writeToFile(filename, entity);
-        return entity;
-    }
-
-    public static void performShopRiteSignIn(HTTPHandler handler) {
-        //fetch saml
-        String SAMLRequest = Utils.doGet(handler, ShopriteURLS.QUICK_SIGN_IN, "SAMLRequest.html", HeaderUtils.getBasicHeaders());
-        //post fetched saml
-        String authenticate3601 = Utils.doPost(handler, ShopriteURLS.AUTHENTICATE3601, "AUTHENTICATE3601.html", HeaderUtils.getAuthenticationHeaders3601(), ParamUtils.buildSamlRequestQueryParameters(), ParamUtils.buildSamlRequestDataParameters(SAMLRequest));
         String postToken = ParamUtils.getRequestVerificationToken(authenticate3601);
-        String SAMLResponse = Utils.doPost(handler, ShopriteURLS.AUTHENTICATE, "SAMLResponse.html", HeaderUtils.getAuthenticationHeaders(), null, HeaderUtils.getAuthenticationInfo(postToken));
-        String signInSuccess = Utils.doPost(handler, ShopriteURLS.SIGN_IN_SUCCESS, "SIGN_IN_SUCCESS.html", HeaderUtils.getSignInSuccessHeaders(), null, ParamUtils.buildSamlResponseDataParameter(SAMLResponse));
+        System.out.println("postToken:" +postToken);
 
-        //performAzureSignIn(handler,SAMLResponse);
-    }
+        String samlResponse = new Post.PostBuilder()
+                .url(ShopriteURLS.AUTHENTICATE)
+                .headers(HeaderUtils.getAuthenticationHeaders())
+                .dataParams(ParamUtils.getAuthenticationInfo(postToken))
+                .contentType(ContentType.APPLICATION_FORM_URLENCODED)
+                .httpClientContext(context)
+                .build().doPost();
 
-    public static void performAzureSignIn(HTTPHandler handler) {
-        String status = Utils.doGet(handler, ShopriteURLS.STATUS, "STATUS_COUPONS.html", HeaderUtils.getStatus());
-        String samlRequest = Utils.doUrlUnencodedGet(handler, ShopriteURLS.AZURE_SIGN_IN, "AZURE_SIGN_IN.html", HeaderUtils.getAzureSignInStatus(), ParamUtils.getAzureSignInStatus(status));
-        String authenticate3601 = Utils.doURLUnencodedPost(handler, ShopriteURLS.AUTHENTICATE3601, "AUTHENTICATE3601.html", HeaderUtils.getAzureAuthenticationHeaders3601(), ParamUtils.buildAzureSamlRequestQueryParameters(), ParamUtils.buildSamlRequestDataParameters(samlRequest));
-        String postToken = ParamUtils.getRequestVerificationToken(authenticate3601);
-        String SAMLResponse = Utils.doPost(handler, ShopriteURLS.AUTHENTICATE, "SAMLResponse.html", HeaderUtils.getAuthenticationHeaders(), null, HeaderUtils.getAuthenticationInfo(postToken));
-        String returnFromSignin = Utils.doPost(handler, ShopriteURLS.AZURE_RETURN_FROM_SIGN_IN, "AZURE_RETURN_FROM_SIGN_IN.html", HeaderUtils.getReturnFromSignInHeaders(), null, ParamUtils.buildSamlResponseDataParameter(SAMLResponse));
-        String webJS = Utils.doGet(handler, ShopriteURLS.WEB_JS, "WEB_JS.html", HeaderUtils.getWebJsHeaders());
+        logString("samlResponse",samlResponse,"samlResponse.html",false);
+
+        String returnFromSignIn = new Post.PostBuilder()
+                .url(AzureUrls.RETURN_FROM_SIGN_IN)
+                .headers(HeaderUtils.getReturnFromSignInHeaders())
+                .dataParams(ParamUtils.buildSamlResponseDataParameter(samlResponse))
+                .contentType(ContentType.APPLICATION_FORM_URLENCODED)
+                .httpClientContext(context)
+                .build().doPost();
+
+        logString("returnFromSignIn",returnFromSignIn,"returnFromSignIn.html",false);
+
+        String webJS = new Get.GetBuilder()
+                .url(ShopriteURLS.WEB_JS)
+                .headers(HeaderUtils.getWebJsHeaders())
+                .httpClientContext(context)
+                .build().doGet();
+
+        logString("webJS",webJS,"webJS.html",false);
+
         AzureToken azureTokens = ParamUtils.buildAzureToken(webJS, status);
-        String azureInfo = Utils.doUrlUnencodedGet(handler, ShopriteURLS.AZURE_SESSION + azureTokens.getUserID(), "AZURE_STATUS.html", HeaderUtils.getAzureStatus(), ParamUtils.buildAzureStatusQueryParam(azureTokens));
-        AzureUserInfo userInfo = new Gson().fromJson(azureInfo, AzureUserInfo.class);
-        String avaiableCoupons = doJSONPost(handler, ShopriteURLS.AZURE_AVAILABLE_COUPONS, "AZURE_AVAILABLE_COUPONS.json", HeaderUtils.getAvailableCoupons(azureTokens), ParamUtils.buildPPCJSON(userInfo));
-        CouponsArray couponsArray = new Gson().fromJson(avaiableCoupons, CouponsArray.class);
-        System.out.println(couponsArray);
+
+        System.out.println("azureTokens:" +azureTokens);
+        System.out.println();
+
+        String azureSession = new Get.GetBuilder()
+                .url(AzureUrls.SESSION + azureTokens.getUserID())
+                .headers(HeaderUtils.getAzureStatus())
+                .queryParams(ParamUtils.buildAzureStatusQueryParam(azureTokens))
+                .encodeQueryParams(false)
+                .httpClientContext(context)
+                .build().doGet();
+
+        System.out.println("azureSession:" +azureSession);
+        logString("azureSession",azureSession,"azureSession.html",true);
+
+        AzureUserInfo userInfo = new Gson().fromJson(azureSession, AzureUserInfo.class);
+
+        System.out.println("userInfo:" +userInfo);
+        System.out.println();
+
+        String availableCoupons = new Post.PostBuilder()
+                .url(AzureUrls.AVAILABLE_COUPONS)
+                .headers(HeaderUtils.getAvailableCoupons(azureTokens))
+                .jsonObject(ParamUtils.buildPPCJSON(userInfo))
+                .contentType(ContentType.APPLICATION_JSON)
+                .httpClientContext(context)
+                .build().doPost();
+
+        System.out.println("availableCoupons:" +availableCoupons);
+        System.out.println();
+        logString("availableCoupons",availableCoupons,"availableCoupons.json",true);
+
+
+        CouponsArray couponsArray = new Gson().fromJson(availableCoupons, CouponsArray.class);
+
+        System.out.println("couponsArray:" +couponsArray);
+        System.out.println();
 
         List<Header> couponHeader = HeaderUtils.getAvailableCoupons(azureTokens);
         for (String coupon : couponsArray.getAvailable_ids_array()) {
-            String response = doJSONPostNoFile(handler, ShopriteURLS.AZURE_COUPONS_ADD, couponHeader, ParamUtils.buildCouponJSON(coupon, userInfo));
+            String response = new Post.PostBuilder()
+                    .url(AzureUrls.COUPONS_ADD)
+                    .headers(couponHeader)
+                    .jsonObject(ParamUtils.buildCouponJSON(coupon, userInfo))
+                    .contentType(ContentType.APPLICATION_JSON)
+                    .httpClientContext(context)
+                    .build().doPost();
             System.out.println("Response: " + response);
         }
+
+    }
+
+    public static void logString(String request,String string, String filename, boolean print){
+        if(print){
+            System.out.println(request+" " + string);
+            System.out.println();
+        }
+
+        writeToFile(filename,string);
     }
 
     public static void setDebugProperties() {
-//        System.setProperty("org.apache.commons.logging.Log", "org.apache.commons.logging.impl.SimpleLog");
-//        System.setProperty("org.apache.commons.logging.simplelog.showdatetime", "true");
+        System.setProperty("org.apache.commons.logging.Log", "org.apache.commons.logging.impl.SimpleLog");
+        System.setProperty("org.apache.commons.logging.simplelog.showdatetime", "true");
 //        System.setProperty("org.apache.commons.logging.simplelog.log.org.apache.http","DEBUG");
-//        System.setProperty("org.apache.commons.logging.simplelog.log.org.apache.http.wire", "DEBUG");
+        System.setProperty("org.apache.commons.logging.simplelog.log.org.apache.http.wire", "DEBUG");
 //        System.setProperty("org.apache.commons.logging.simplelog.log.org.apache.http.impl.conn","DEBUG");
 //        System.setProperty("org.apache.commons.logging.simplelog.log.org.apache.http.impl.client","DEBUG");
 //        System.setProperty("org.apache.commons.logging.simplelog.log.org.apache.http.client", "DEBUG");

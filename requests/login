@@ -1,7 +1,0 @@
-1. On browsing from shoprite.com to secure.shoprite.com/User/SignIn/3601 5 cookies are created
-    ID_SAML_3601	20f5c05d-9391-47df-8135-280502bd3e20	.secure.shoprite.com	/	1969-12-31T23:59:59.000Z	48		✓
-    ID_SG	3601	.secure.shoprite.com	/	2018-05-13T19:58:07.004Z	9		✓
-    ID_SendToSPOnCompletion	False	.secure.shoprite.com	/	1969-12-31T23:59:59.000Z	28		✓
-    __RequestVerificationToken	ceqsTrJv-saCDYCbTJZmDhhQaeVMi87uB5GAs2q-Y-juUI4N7XOKEKAO0iqFcu8rRnOCuX1zaTgPgFO4mL1DTsXq-Xs1	secure.shoprite.com	/	1969-12-31T23:59:59.000Z	118	✓
-    ID_CANCEL	https://www.shoprite.com/?store=DFA0738	.secure.shoprite.com	/	1969-12-31T23:59:59.000Z	48		✓
-2.
