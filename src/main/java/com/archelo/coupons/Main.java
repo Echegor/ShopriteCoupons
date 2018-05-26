@@ -2,6 +2,7 @@ package com.archelo.coupons;
 
 
 
+import com.archelo.coupons.http.Server;
 import com.archelo.coupons.utils.Utils;
 
 import java.io.IOException;
@@ -12,6 +13,8 @@ public class Main {
         System.out.println("Running");
 
         Utils.setDebugProperties();
+        Server server = new Server();
+        server.start();
 //        Utils.performShopRiteSignIn(handler);
 
 

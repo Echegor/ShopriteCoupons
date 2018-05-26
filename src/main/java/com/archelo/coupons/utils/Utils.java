@@ -34,10 +34,10 @@ public class Utils {
     }
 
     public static void performAzureSignIn() throws IOException {
-        HttpHost proxy = new HttpHost("10.120.30.19", 8080, "http");
+        //HttpHost proxy = new HttpHost("10.120.30.19", 8080, "http");
         RequestConfig globalConfig = RequestConfig
                 .custom()
-                .setProxy(proxy)
+                //.setProxy(proxy)
                 .setCircularRedirectsAllowed(false)
                 .build();
         HttpClientContext context;
@@ -65,7 +65,8 @@ public class Utils {
         logString("samlRequest",samlRequest,"samlRequest.html",false);
 
         String authenticate3601 = new Post.PostBuilder()
-                .url(ShopriteURLS.AUTHENTICATE3601)
+                //.url(ShopriteURLS.AUTHENTICATE3601)
+                .url("http://localhost:8080")
                 .headers(HeaderUtils.getAzureAuthenticationHeaders3601(status))
                 .queryParams(ParamUtils.buildAzureSamlRequestQueryParameters())
                 .dataParams(ParamUtils.buildSamlRequestDataParameters(samlRequest))
@@ -74,89 +75,89 @@ public class Utils {
                 .encodeQueryParams(true)
                 .build().doPost();
 
-        logString("authenticate3601",authenticate3601,"authenticate3601.html",false);
+//        logString("authenticate3601",authenticate3601,"authenticate3601.html",false);
+//
+//        String postToken = ParamUtils.getRequestVerificationToken(authenticate3601);
+//        System.out.println("postToken:" +postToken);
+//
+//        String samlResponse = new Post.PostBuilder()
+//                .url(ShopriteURLS.AUTHENTICATE)
+//                .headers(HeaderUtils.getAuthenticationHeaders())
+//                .dataParams(ParamUtils.getAuthenticationInfo(postToken))
+//                .contentType(ContentType.APPLICATION_FORM_URLENCODED)
+//                .httpClientContext(context)
+//                .build().doPost();
+//
+//        logString("samlResponse",samlResponse,"samlResponse.html",false);
+//
+//        String returnFromSignIn = new Post.PostBuilder()
+//                .url(AzureUrls.RETURN_FROM_SIGN_IN)
+//                .headers(HeaderUtils.getReturnFromSignInHeaders())
+//                .dataParams(ParamUtils.buildSamlResponseDataParameter(samlResponse))
+//                .contentType(ContentType.APPLICATION_FORM_URLENCODED)
+//                .httpClientContext(context)
+//                .build().doPost();
+//
+//        logString("returnFromSignIn",returnFromSignIn,"returnFromSignIn.html",false);
+//
+//        String webJS = new Get.GetBuilder()
+//                .url(ShopriteURLS.WEB_JS)
+//                .headers(HeaderUtils.getWebJsHeaders())
+//                .httpClientContext(context)
+//                .build().doGet();
+//
+//        logString("webJS",webJS,"webJS.html",false);
+//
+//        AzureToken azureTokens = ParamUtils.buildAzureToken(webJS, status);
+//
+//        System.out.println("azureTokens:" +azureTokens);
+//        System.out.println();
+//
+//        String azureSession = new Get.GetBuilder()
+//                .url(AzureUrls.SESSION + azureTokens.getUserID())
+//                .headers(HeaderUtils.getAzureStatus())
+//                .queryParams(ParamUtils.buildAzureStatusQueryParam(azureTokens))
+//                .encodeQueryParams(false)
+//                .httpClientContext(context)
+//                .build().doGet();
+//
+//        System.out.println("azureSession:" +azureSession);
+//        logString("azureSession",azureSession,"azureSession.html",true);
+//
+//        AzureUserInfo userInfo = new Gson().fromJson(azureSession, AzureUserInfo.class);
+//
+//        System.out.println("userInfo:" +userInfo);
+//        System.out.println();
+//
+//        String availableCoupons = new Post.PostBuilder()
+//                .url(AzureUrls.AVAILABLE_COUPONS)
+//                .headers(HeaderUtils.getAvailableCoupons(azureTokens))
+//                .jsonObject(ParamUtils.buildPPCJSON(userInfo))
+//                .contentType(ContentType.APPLICATION_JSON)
+//                .httpClientContext(context)
+//                .build().doPost();
+//
+//        System.out.println("availableCoupons:" +availableCoupons);
+//        System.out.println();
+//        logString("availableCoupons",availableCoupons,"availableCoupons.json",true);
+//
+//
+//        CouponsArray couponsArray = new Gson().fromJson(availableCoupons, CouponsArray.class);
+//
+//        System.out.println("couponsArray:" +couponsArray);
+//        System.out.println();
 
-        String postToken = ParamUtils.getRequestVerificationToken(authenticate3601);
-        System.out.println("postToken:" +postToken);
-
-        String samlResponse = new Post.PostBuilder()
-                .url(ShopriteURLS.AUTHENTICATE)
-                .headers(HeaderUtils.getAuthenticationHeaders())
-                .dataParams(ParamUtils.getAuthenticationInfo(postToken))
-                .contentType(ContentType.APPLICATION_FORM_URLENCODED)
-                .httpClientContext(context)
-                .build().doPost();
-
-        logString("samlResponse",samlResponse,"samlResponse.html",false);
-
-        String returnFromSignIn = new Post.PostBuilder()
-                .url(AzureUrls.RETURN_FROM_SIGN_IN)
-                .headers(HeaderUtils.getReturnFromSignInHeaders())
-                .dataParams(ParamUtils.buildSamlResponseDataParameter(samlResponse))
-                .contentType(ContentType.APPLICATION_FORM_URLENCODED)
-                .httpClientContext(context)
-                .build().doPost();
-
-        logString("returnFromSignIn",returnFromSignIn,"returnFromSignIn.html",false);
-
-        String webJS = new Get.GetBuilder()
-                .url(ShopriteURLS.WEB_JS)
-                .headers(HeaderUtils.getWebJsHeaders())
-                .httpClientContext(context)
-                .build().doGet();
-
-        logString("webJS",webJS,"webJS.html",false);
-
-        AzureToken azureTokens = ParamUtils.buildAzureToken(webJS, status);
-
-        System.out.println("azureTokens:" +azureTokens);
-        System.out.println();
-
-        String azureSession = new Get.GetBuilder()
-                .url(AzureUrls.SESSION + azureTokens.getUserID())
-                .headers(HeaderUtils.getAzureStatus())
-                .queryParams(ParamUtils.buildAzureStatusQueryParam(azureTokens))
-                .encodeQueryParams(false)
-                .httpClientContext(context)
-                .build().doGet();
-
-        System.out.println("azureSession:" +azureSession);
-        logString("azureSession",azureSession,"azureSession.html",true);
-
-        AzureUserInfo userInfo = new Gson().fromJson(azureSession, AzureUserInfo.class);
-
-        System.out.println("userInfo:" +userInfo);
-        System.out.println();
-
-        String availableCoupons = new Post.PostBuilder()
-                .url(AzureUrls.AVAILABLE_COUPONS)
-                .headers(HeaderUtils.getAvailableCoupons(azureTokens))
-                .jsonObject(ParamUtils.buildPPCJSON(userInfo))
-                .contentType(ContentType.APPLICATION_JSON)
-                .httpClientContext(context)
-                .build().doPost();
-
-        System.out.println("availableCoupons:" +availableCoupons);
-        System.out.println();
-        logString("availableCoupons",availableCoupons,"availableCoupons.json",true);
-
-
-        CouponsArray couponsArray = new Gson().fromJson(availableCoupons, CouponsArray.class);
-
-        System.out.println("couponsArray:" +couponsArray);
-        System.out.println();
-
-        List<Header> couponHeader = HeaderUtils.getAvailableCoupons(azureTokens);
-        for (String coupon : couponsArray.getAvailable_ids_array()) {
-            String response = new Post.PostBuilder()
-                    .url(AzureUrls.COUPONS_ADD)
-                    .headers(couponHeader)
-                    .jsonObject(ParamUtils.buildCouponJSON(coupon, userInfo))
-                    .contentType(ContentType.APPLICATION_JSON)
-                    .httpClientContext(context)
-                    .build().doPost();
-            System.out.println("Response: " + response);
-        }
+//        List<Header> couponHeader = HeaderUtils.getAvailableCoupons(azureTokens);
+//        for (String coupon : couponsArray.getAvailable_ids_array()) {
+//            String response = new Post.PostBuilder()
+//                    .url(AzureUrls.COUPONS_ADD)
+//                    .headers(couponHeader)
+//                    .jsonObject(ParamUtils.buildCouponJSON(coupon, userInfo))
+//                    .contentType(ContentType.APPLICATION_JSON)
+//                    .httpClientContext(context)
+//                    .build().doPost();
+//            System.out.println("Response: " + response);
+//        }
 
     }
 
