@@ -35,7 +35,7 @@ public class Post extends HttpMethod {
         endodedQueryParams = toURLEncodedString(queryParams,false,encodeQueryParams);
 
         if(contentType == ContentType.APPLICATION_FORM_URLENCODED){
-            endodedDataParams = toURLEncodedString(dataParams,true,encodeQueryParams);
+            endodedDataParams = toURLEncodedString(dataParams,true,encodeDataParams);
         }
         else if(contentType == ContentType.APPLICATION_JSON){
             endodedDataParams = jsonObject.toString();

@@ -65,7 +65,7 @@ public class Utils {
         logString("samlRequest",samlRequest,"samlRequest.html",false);
 
         String authenticate3601 = new Post.PostBuilder()
-                //.url(ShopriteURLS.AUTHENTICATE3601)
+//                .url(ShopriteURLS.AUTHENTICATE3601)
                 .url("http://localhost:8080")
                 .headers(HeaderUtils.getAzureAuthenticationHeaders3601(status))
                 .queryParams(ParamUtils.buildAzureSamlRequestQueryParameters())
@@ -73,10 +73,11 @@ public class Utils {
                 .contentType(ContentType.APPLICATION_FORM_URLENCODED)
                 .httpClientContext(context)
                 .encodeQueryParams(true)
+                .encodeDataParams(true)
                 .build().doPost();
 
 //        logString("authenticate3601",authenticate3601,"authenticate3601.html",false);
-//
+
 //        String postToken = ParamUtils.getRequestVerificationToken(authenticate3601);
 //        System.out.println("postToken:" +postToken);
 //
